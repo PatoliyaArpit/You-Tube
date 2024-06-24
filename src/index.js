@@ -1,14 +1,25 @@
 import dotenv from 'dotenv';
 import connectDB from './db/index.js';
+import app from './app.js';
 // import mongoose from 'mongoose';
 // import { DB_NAME } from './constants.js';
 
 dotenv.config({ path: './env' });
 
-console.log('MONGODB_URI:', process.env.MONGODB_URI);
 
 // Connect to the database
-connectDB();
+connectDB()
+.then(()=>{
+   app.listen(process.env.PORT||8000,()=>{
+    console.log(`server is running ai pott ${process.env.PORT}`);
+   })
+})
+.catch((error)=>{
+    console.log(" mongodg connection fail",error)
+})
+
+
+
 
 // import express from "express";
 // const app=express();
